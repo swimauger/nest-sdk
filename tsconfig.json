@@ -3,6 +3,6 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "target": "ES5"
+    "target": "ES2023"
   }
 }

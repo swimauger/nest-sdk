@@ -43,12 +43,13 @@ async function generateSdk(options: NestSdkPluginOptions) {
       '-o',
       options.outputPath
     ]);
-  } catch (error) {
-    // TODO: Implement an enqueue generate sdk factory function to prevent generating an sdk while sdk is being generated during watch changes.
-    if (!options.silent && error.code !== 'EADDRINUSE') logger.error(error, 'NestSdkPlugin');
-  } finally {
     if (!options.silent) logger.log('Nest SDK generated successfully', 'NestSdkPlugin');
-    await app.close();
+  } catch (error) {
+    // TODO: Implement an enqueue generate sdk factory function to prevent generating an sdk while sdk is already being generated during watch changes.
+    if (!options.silent && error.code !== 'EADDRINUSE') logger.error(error, 'NestSdkPlugin');
+    // TODO: Build errors never get escalated because silent will always be true.
+  } finally {
+    await app?.close();
   }
 }
 
@@ -75,7 +76,7 @@ export const after: NestCompilerPlugin['after'] = (userOptions, program) => {
     outputPath: 'sdk',
     port: 9525,
     ...userOptions,
-    silent: !('preserveWatchOutput' in program.getCompilerOptions()) && userOptions.silent,
+    silent: userOptions.silent || !/start|watch/.test(process.argv.toString())
   };
   debouncedGenerateSdk(options);
   return function(_context: ts.TransformationContext): ts.Transformer<ts.SourceFile> {
