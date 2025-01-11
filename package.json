@@ -1,6 +1,6 @@
 {
   "name": "nest-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"
