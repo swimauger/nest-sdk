@@ -1,0 +1,33 @@
+{
+  "name": "nest-sdk",
+  "version": "1.0.2",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "watch": "tsc --build --watch"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "latest"
+  },
+  "peerDependencies": {
+    "@nestjs/cli": "*",
+    "@nestjs/common": "*",
+    "@nestjs/core": "*",
+    "@nestjs/swagger": "*",
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@nestjs/cli": "latest",
+    "@nestjs/common": "latest",
+    "@nestjs/core": "latest",
+    "@nestjs/swagger": "latest",
+    "@nestjs/platform-express": "latest",
+    "typescript": "latest"
+  }
+}
